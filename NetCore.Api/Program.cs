@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using NetCore.Api.Config;
 
 namespace NetCore.Api
 {
@@ -14,7 +15,9 @@ namespace NetCore.Api
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            BuildWebHost(args)
+                .SeedDatabase()
+                .Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>

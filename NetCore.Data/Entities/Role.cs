@@ -1,14 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using NetCore.Data.Common;
+using System.ComponentModel.DataAnnotations;
 
 namespace NetCore.Data.Entities
 {
     public class Role
     {
-        //public const string SalesRep_NAME = "SalesRep";
-        //public const string SalesRep_DISPLAY_NAME = "Sales rep";
-        //public const RoleRelationCount SalesRep_COUNTRY_SPECIFIC = RoleRelationCount.Single;
-        //public const RoleRelationCount SalesRep_DIVISION_SPECIFIC = RoleRelationCount.Single;
-        //public const string SalesRep_PARENT_ROLE_NAME = RSM_NAME;
+        public const string Administrator_NAME = "Administrator";
+        public const string Administrator_DISPLAY_NAME = "Administrator";
+        public const RoleRelationCount Administrator_COUNTRY_SPECIFIC = RoleRelationCount.None;
+        public const RoleRelationCount Administrator_DIVISION_SPECIFIC = RoleRelationCount.None;
+        public const string Administrator_PARENT_ROLE_NAME = null;
 
         [Key]
         public long Id { get; set; }
