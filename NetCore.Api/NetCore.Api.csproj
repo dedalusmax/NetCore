@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Folder Include="Config\NodeServices\" />
+    <Folder Include="Logs\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
