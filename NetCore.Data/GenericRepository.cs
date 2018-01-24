@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace NetCore.Data
@@ -32,6 +33,11 @@ namespace NetCore.Data
         public void InsertMultiple(IEnumerable<TEntity> entities)
         {
             _context.Set<TEntity>().AddRange(entities);
+        }
+
+        public IQueryable<TEntity> AsReadOnly()
+        {
+            return _context.Set<TEntity>().AsNoTracking();
         }
     }
 }

@@ -34,5 +34,11 @@ namespace NetCore.Data
         /// </summary>
         /// <param name="entity">The entity.</param>
         void Delete(TEntity entity);
+
+        /// <summary>
+        /// Gets all entities as read-only values.
+        /// </summary>
+        /// <returns>Query of read-only entities.</returns>
+        IQueryable<TEntity> AsReadOnly();
     }
 }
