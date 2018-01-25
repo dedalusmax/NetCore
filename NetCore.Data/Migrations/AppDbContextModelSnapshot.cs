@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using NetCore.Data;
+using NetCore.Data.Common;
 using System;
 
 namespace NetCore.Data.Migrations
@@ -37,7 +38,7 @@ namespace NetCore.Data.Migrations
 
                     b.HasIndex("CurrencyId");
 
-                    b.ToTable("Country");
+                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("NetCore.Data.Entities.Currency", b =>
@@ -61,6 +62,26 @@ namespace NetCore.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("Currencies");
+                });
+
+            modelBuilder.Entity("NetCore.Data.Entities.EmailTemplate", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasMaxLength(4500);
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<int>("Type");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EmailTemplates");
                 });
 
             modelBuilder.Entity("NetCore.Data.Entities.Role", b =>
