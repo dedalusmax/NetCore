@@ -7,7 +7,9 @@ namespace NetCore.Data
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Country> Countries { get; set; }
         public DbSet<Currency> Currencies { get; set; }
+        public DbSet<EmailTemplate> EmailTemplates { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
