@@ -10,11 +10,12 @@ namespace NetCore.Api.Controllers
 {
     //[Authorize]
     [Route("api/v1/[controller]")]
-    public class CurrencyController : Controller
+    public class CurrencyController : EntityController<Currency, Currency>
     {
         private readonly CurrencyService _service;
 
         public CurrencyController(CurrencyService service)
+            : base(service)
         {
             _service = service;
         }
@@ -32,6 +33,14 @@ namespace NetCore.Api.Controllers
         public async Task<IActionResult> UpdateAll([FromBody] IEnumerable<Currency> exchangeRates)
         {
             return Ok(await _service.UpdateAllAsync(exchangeRates));
+        }
+
+        // [AuthorizeAdmin]
+        [HttpPost, Route("")]
+        [ProducesResponseType(typeof(Currency), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> Create([FromBody]Currency model)
+        {
+            return await CreateAsync(model);
         }
     }
 }

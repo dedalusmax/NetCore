@@ -6,7 +6,7 @@ namespace NetCore.Data.Entities
     public class Currency
     {
 
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
 
         [Required, MaxLength(255)]
@@ -17,10 +17,5 @@ namespace NetCore.Data.Entities
 
         [Required]
         public decimal FromUSD { get; set; }
-
-        [ForeignKey("CurrencySettings")]
-        public long? CurrencySettingsId { get; set; }
-
-        //public virtual CurrencySettings CurrencySettings { get; set; }
     }
 }

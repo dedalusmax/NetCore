@@ -46,8 +46,6 @@ namespace NetCore.Data.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long?>("CurrencySettingsId");
-
                     b.Property<string>("DisplayName")
                         .IsRequired()
                         .HasMaxLength(255);

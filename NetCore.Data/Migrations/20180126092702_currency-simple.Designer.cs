@@ -12,8 +12,8 @@ using System;
 namespace NetCore.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20180126085913_currency-365")]
-    partial class currency365
+    [Migration("20180126092702_currency-simple")]
+    partial class currencysimple
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,8 +46,6 @@ namespace NetCore.Data.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<long?>("CurrencySettingsId");
 
                     b.Property<string>("DisplayName")
                         .IsRequired()

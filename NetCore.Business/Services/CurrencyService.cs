@@ -11,28 +11,20 @@ using Entities = NetCore.Data.Entities;
 
 namespace NetCore.Business.Services
 {
-    public class CurrencyService
+    public class CurrencyService : EntityService<Entities.Currency, Currency, Currency>
     {
 
-        private readonly IDatabaseScope _database;
         private readonly IGenericRepository<Entities.Currency> _currencyReposiotry;
 
-        public CurrencyService(IDatabaseScope database,
-            IGenericRepository<Entities.Currency> currencyRepository)
+        public CurrencyService(
+            IDatabaseScope database,
+            IGenericRepository<Entities.Currency> currencyRepository
+            ) : base(database, currencyRepository)
         {
-            _database = database;
             _currencyReposiotry = currencyRepository;
         }
 
         #region Public methods
-        public async Task<IEnumerable<Currency>> GetAllAsync()
-        {
-            var result = await _currencyReposiotry.GetAll()
-                .ProjectTo<Currency>()
-                .ToListAsync();
-
-            return result;
-        }
 
         public async Task<IEnumerable<Currency>> UpdateAllAsync(IEnumerable<Currency> exchangeRates)
         {
@@ -54,8 +46,22 @@ namespace NetCore.Business.Services
 
         #endregion
 
-        #region Private methods
 
+        #region EntityService
+        protected override IQueryable<Entities.Currency> GetAllEntities(IQueryable<Entities.Currency> query)
+        {
+            return query;
+        }
+
+        protected async override Task<Entities.Currency> GetEntityByIdAsync(IQueryable<Entities.Currency> query, long id)
+        {
+            return await GetAllEntities(query).SingleOrDefaultAsync(_ => _.Id == id);
+        }
+
+        protected override void UpdateEntity(Entities.Currency entity, Currency model)
+        {
+            Mapper.Map<Currency, Entities.Currency>(model, entity);
+        }
 
         #endregion
 
