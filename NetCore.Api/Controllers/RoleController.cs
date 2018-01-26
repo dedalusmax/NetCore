@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using NetCore.Business.Models;
 using NetCore.Business.Services;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace NetCore.Api.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/v1/[controller]")]
     public class RoleController : Controller
     {

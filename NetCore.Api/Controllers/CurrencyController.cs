@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetCore.Api.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/v1/[controller]")]
     public class CurrencyController : Controller
     {
@@ -24,13 +24,6 @@ namespace NetCore.Api.Controllers
         public async Task<IActionResult> GetAll()
         {
             return Ok(await _service.GetAllAsync());
-        }
-
-        [HttpGet, Route("settings")]
-        [ProducesResponseType(typeof(List<Currency>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetAllWithSettings()
-        {
-            return Ok(await _service.GetAllWithSettingsAsync());
         }
 
         //[AuthorizeDirector]

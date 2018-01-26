@@ -17,7 +17,5 @@ namespace NetCore.Business.Models
     public class Country : CountryBase
     {
         public long Id { get; set; }
-
-        public decimal Type365Threshold { get; set; }
     }
 }

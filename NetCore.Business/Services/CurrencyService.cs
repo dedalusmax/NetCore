@@ -34,16 +34,6 @@ namespace NetCore.Business.Services
             return result;
         }
 
-
-        public async Task<IEnumerable<Currency>> GetAllWithSettingsAsync()
-        {
-            var result = await _currencyReposiotry.GetAll()
-                .ProjectTo<CurrencyWithSettings>()
-                .ToListAsync();
-
-            return result;
-        }
-
         public async Task<IEnumerable<Currency>> UpdateAllAsync(IEnumerable<Currency> exchangeRates)
         {
             var results = await _currencyReposiotry.GetAll().ToListAsync();
@@ -73,9 +63,7 @@ namespace NetCore.Business.Services
 
         internal static void RegisterMappings(Profile profile)
         {
-            //profile.CreateMap<Entities.Currency, Currency>();
-            //profile.CreateMap<Entities.Currency, CurrencyWithSettings>()
-            //    .ForMember(_ => _.Type365Threshold, _ => _.MapFrom(__ => __.CurrencySettings.Type365Threshold));
+            profile.CreateMap<Entities.Currency, Currency>();
         }
 
         #endregion

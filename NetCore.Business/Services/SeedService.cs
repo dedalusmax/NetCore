@@ -53,16 +53,16 @@ namespace NetCore.Business.Services
 
         private void SeedCurrencies()
         {
-            var requiredCurrencies = new(string DisplayName, decimal ToUSD, decimal FromUSD, decimal Type365Threshold)[]
+            var requiredCurrencies = new(string DisplayName, decimal ToUSD, decimal FromUSD)[]
             {
                 // default currencies values - displayName, toUsd, fromUsd, type 365 threshold
-                ("GBP", 1.3029m, 0.7675m, 8000m),
-                ("EUR", 1.1201m, 0.8928m, 9080m),
-                ("CHF", 1.0285m, 0.9723m, 10624m),
-                ("SEK", 0.1166m, 8.5751m, 90168m),
-                ("NOK", 0.1234m, 8.1015m, 89311m),
-                ("DKK", 0.1506m, 6.6399m, 67590m),
-                ("PLZ", 0.2614m, 3.8254m, 38241m),
+                ("GBP", 1.3029m, 0.7675m),
+                ("EUR", 1.1201m, 0.8928m),
+                ("CHF", 1.0285m, 0.9723m),
+                ("SEK", 0.1166m, 8.5751m),
+                ("NOK", 0.1234m, 8.1015m),
+                ("DKK", 0.1506m, 6.6399m),
+                ("PLZ", 0.2614m, 3.8254m),
             };
 
             var existingCurrencies = _currencyRepository.GetAll().ToList();
@@ -77,24 +77,10 @@ namespace NetCore.Business.Services
                     DisplayName = currencyToAdd.DisplayName,
                     ToUSD = currencyToAdd.ToUSD,
                     FromUSD = currencyToAdd.FromUSD,
-                    //CurrencySettings = new CurrencySettings()
-                    //{
-                    //    Type365Threshold = currencyToAdd.Type365Threshold
-                    //}
                 };
 
                 _currencyRepository.Insert(currency);
             }
-
-            //foreach (var currencyToModify in currenciesToModify)
-            //{
-            //    var threshold = requiredCurrencies.Where(_ => _.DisplayName == currencyToModify.DisplayName).Select(_ => _.Type365Threshold).FirstOrDefault();
-
-            //    currencyToModify.CurrencySettings = new CurrencySettings()
-            //    {
-            //        Type365Threshold = threshold
-            //    };
-            //}
         }
 
         private void SeedRoles()

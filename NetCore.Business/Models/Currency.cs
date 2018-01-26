@@ -18,9 +18,4 @@ namespace NetCore.Business.Models
         [Required]
         public decimal FromUSD { get; set; }
     }
-
-    public class CurrencyWithSettings : Currency
-    {
-        public decimal Type365Threshold { get; set; }
-    }
 }

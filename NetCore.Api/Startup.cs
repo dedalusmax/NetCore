@@ -67,7 +67,7 @@ namespace NetCore.Api
             // Configure swagger
             services.AddSwaggerGen(options =>
             {
-                options.OperationFilter<AddAuthorizationHeaderParameterFilter>();
+                // options.OperationFilter<AddAuthorizationHeaderParameterFilter>();
 
                 options.SwaggerDoc("v1", new Info { Title = "NetCore", Version = "v1" });
                 options.DescribeAllEnumsAsStrings();

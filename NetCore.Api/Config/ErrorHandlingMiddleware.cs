@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System.Net;
 using System.Threading.Tasks;
 using NetCore.Business.Validation;
+using System;
 
 namespace NetCore.Api.Config
 {
@@ -37,6 +38,10 @@ namespace NetCore.Api.Config
             catch (ForbiddenException)
             {
                 await HandleErrorAsync(context, HttpStatusCode.Forbidden);
+            }
+            catch (Exception ex)
+            {
+                await HandleErrorAsync(context, HttpStatusCode.InternalServerError);
             }
         }
 
