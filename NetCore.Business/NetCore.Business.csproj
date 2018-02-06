@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Authentication\AuthenticationService.cs~RF1334243.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\NetCore.Data\NetCore.Data.csproj" />
   </ItemGroup>
 

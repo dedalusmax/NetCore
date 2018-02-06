@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NetCore.Api.Config;
 using NetCore.Business.Models;
 using NetCore.Business.Services;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetCore.Api.Controllers
 {
-    //[AuthorizeManager]
+    [Authorize]
     [Route("api/v1/[controller]")]
     public class UserController : Controller
     {

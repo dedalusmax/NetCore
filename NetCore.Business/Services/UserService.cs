@@ -16,7 +16,6 @@ namespace NetCore.Business.Services
         private readonly IGenericRepository<Entities.User> _userRepository;
         private readonly IGenericRepository<Entities.Role> _roleRepository;
         private readonly IGenericRepository<Entities.Country> _countryRepository;
-        //private readonly IGenericRepository<Entities.Division> _divisionRepository;
         private readonly IGenericRepository<Entities.Currency> _currencyRepository;
 
         public UserService(
@@ -24,14 +23,12 @@ namespace NetCore.Business.Services
             IGenericRepository<Entities.User> userRepository,
             IGenericRepository<Entities.Role> roleRepository,
             IGenericRepository<Entities.Country> countryRepository,
-            //IGenericRepository<Entities.Division> divisionRepository,
             IGenericRepository<Entities.Currency> currencyRepository)
         {
             _database = database;
             _userRepository = userRepository;
             _roleRepository = roleRepository;
             _countryRepository = countryRepository;
-            //_divisionRepository = divisionRepository;
             _currencyRepository = currencyRepository;
         }
 
@@ -42,7 +39,6 @@ namespace NetCore.Business.Services
             return await _userRepository
                 .AsReadOnly()
                 .Include(_ => _.Countries)
-                //.Include(_ => _.Divisions)
                 .ProjectTo<User>()
                 .ToListAsync();
         }
@@ -52,9 +48,7 @@ namespace NetCore.Business.Services
             var entity = await _userRepository
                 .AsReadOnly()
                 .Include(_ => _.Role)
-                .Include(_ => _.ParentUser)
                 .Include(_ => _.Countries)
-                //.Include(_ => _.Divisions)
                 .SingleOrDefaultAsync(_ => _.Id == id);
 
             entity.RejectNotFound();
@@ -84,9 +78,7 @@ namespace NetCore.Business.Services
             var entity = await _userRepository
                 .GetAll()
                 .Include(_ => _.Role)
-                .Include(_ => _.ParentUser)
                 .Include(_ => _.Countries)
-                //.Include(_ => _.Divisions)
                 .SingleOrDefaultAsync(_ => _.Id == id);
 
             entity.RejectNotFound();
@@ -117,13 +109,9 @@ namespace NetCore.Business.Services
         {
             profile.CreateMap<Entities.User, User>()
                 .ForMember(_ => _.CountryIds, _ => _.MapFrom(__ => __.Countries));
-                //.ForMember(_ => _.DivisionIds, _ => _.MapFrom(__ => __.Divisions));
 
             profile.CreateMap<Entities.UserCountry, long>()
                 .ProjectUsing(_ => _.CountryId);
-
-            //profile.CreateMap<Entities.UserDivision, long>()
-            //    .ProjectUsing(_ => _.DivisionId);
         }
 
         #endregion
@@ -133,7 +121,6 @@ namespace NetCore.Business.Services
         private void UpdateEntity(Entities.User entity, UserBase model)
         {
             entity.RoleId = model.RoleId;
-            entity.ParentUserId = model.ParentUserId;
             entity.UserName = model.UserName;
             entity.Email = model.Email;
             entity.DisplayName = model.DisplayName;
@@ -143,12 +130,6 @@ namespace NetCore.Business.Services
             //    keySelectorDestination: _ => _.CountryId,
             //    keySelectorSource: _ => _,
             //    converter: _ => new Entities.UserCountry { CountryId = _ });
-
-            //entity.Divisions.UpdateManyToMany(
-            //    source: model.DivisionIds,
-            //    keySelectorDestination: _ => _.DivisionId,
-            //    keySelectorSource: _ => _,
-            //    converter: _ => new Entities.UserDivision { DivisionId = _ });
         }
 
         private async Task AdditionalValidationAsync(UserBase model)

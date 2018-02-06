@@ -19,9 +19,6 @@ namespace NetCore.Data.Entities
         [ForeignKey("Role")]
         public long? RoleId { get; set; }
 
-        [ForeignKey("ParentUser")]
-        public long? ParentUserId { get; set; }
-
         [Required, MaxLength(255)]
         public string UserName { get; set; }
 
@@ -44,11 +41,7 @@ namespace NetCore.Data.Entities
 
         public virtual Role Role { get; set; }
 
-        public virtual User ParentUser { get; set; }
-
         public virtual ICollection<UserCountry> Countries { get; set; }
-
-        //public virtual ICollection<UserDivision> Divisions { get; set; }
     }
 
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NetCore.Api.Config;
 using NetCore.Business.Models;
 using NetCore.Business.Services;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NetCore.Api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/v1/[controller]")]
     public class CurrencyController : EntityController<Currency, Currency>
     {
@@ -27,7 +28,7 @@ namespace NetCore.Api.Controllers
             return Ok(await _service.GetAllAsync());
         }
 
-        //[AuthorizeDirector]
+        [AuthorizeAdmin]
         [HttpPut, Route("")]
         [ProducesResponseType(typeof(List<Currency>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> UpdateAll([FromBody] IEnumerable<Currency> exchangeRates)
@@ -35,7 +36,7 @@ namespace NetCore.Api.Controllers
             return Ok(await _service.UpdateAllAsync(exchangeRates));
         }
 
-        // [AuthorizeAdmin]
+        [AuthorizeAdmin]
         [HttpPost, Route("")]
         [ProducesResponseType(typeof(Currency), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Create([FromBody]Currency model)

@@ -15,13 +15,10 @@ namespace NetCore.Business.Models
         public UserBase()
         {
             CountryIds = new HashSet<long>();
-            DivisionIds = new HashSet<long>();
         }
 
         [Required]
         public long? RoleId { get; set; }
-
-        public long? ParentUserId { get; set; }
 
         [Required, StringLength(255)]
         public string UserName { get; set; }
@@ -33,7 +30,5 @@ namespace NetCore.Business.Models
         public string DisplayName { get; set; }
 
         public ICollection<long> CountryIds { get; set; }
-
-        public ICollection<long> DivisionIds { get; set; }
     }
 }

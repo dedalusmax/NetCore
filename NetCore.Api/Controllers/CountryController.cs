@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NetCore.Api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/v1/[controller]")]
     public class CountryController : EntityController<Country, CountryBase>
     {
@@ -43,7 +43,7 @@ namespace NetCore.Api.Controllers
             return await GetAsync(id);
         }
 
-       // [AuthorizeAdmin]
+        [AuthorizeAdmin]
         [HttpPost, Route("")]
         [ProducesResponseType(typeof(Country), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Create([FromBody]CountryBase model)

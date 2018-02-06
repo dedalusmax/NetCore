@@ -1,4 +1,5 @@
-﻿using AutoMapper.QueryableExtensions;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using NetCore.Business.Models;
 using NetCore.Data;
@@ -29,12 +30,12 @@ namespace NetCore.Business.Services
 
         #region Internal methods
 
-        //internal static void RegisterMappings(Profile profile)
-        //{
-        //    profile.CreateMap<Entities.Role, Role>()
-        //        .ForMember(_ => _.ParentRoleName, _ => _.MapFrom(__ => __.ParentRole.Name))
-        //        .ForMember(_ => _.ParentRoleDisplayName, _ => _.MapFrom(__ => __.ParentRole.DisplayName));
-        //}
+        internal static void RegisterMappings(Profile profile)
+        {
+            //profile.CreateMap<Entities.Role, Role>()
+            //    .ForMember(_ => _.ParentRoleName, _ => _.MapFrom(__ => __.ParentRole.Name))
+            //    .ForMember(_ => _.ParentRoleDisplayName, _ => _.MapFrom(__ => __.ParentRole.DisplayName));
+        }
 
         #endregion
     }

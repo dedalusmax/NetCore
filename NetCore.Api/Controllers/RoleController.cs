@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetCore.Api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/v1/[controller]")]
     public class RoleController : Controller
     {

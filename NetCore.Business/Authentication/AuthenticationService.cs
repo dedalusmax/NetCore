@@ -43,7 +43,16 @@ namespace NetCore.Business.Authentication
             var passwordHash = _cryptographyService.CreateHash(model.Password, user.PasswordSalt);
             if (passwordHash != user.PasswordHash) throw new InvalidModelException();
 
-            var tokenData = Mapper.Map<Entities.User, TokenData>(user);
+            TokenData tokenData = null;
+
+            try
+            {
+                tokenData = Mapper.Map<Entities.User, TokenData>(user);
+            }
+            catch (Exception ex)
+            {
+                user.RejectInvalid();
+            }
 
             var tokenTask = _tokenProvider.CreateTokenAsync(tokenData);
             var refreshTokenTask = _tokenProvider.CreateRefreshTokenAsync(tokenData);

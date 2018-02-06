@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using NetCore.Api.Config;
 using NetCore.Business.Authentication;
 
 namespace NetCore.Api.Controllers
@@ -21,6 +22,7 @@ namespace NetCore.Api.Controllers
             return Ok(result);
         }
 
+        [AuthorizeAdmin]
         [HttpPost, Route("resetPassword")]
         public async Task<IActionResult> ResetPassword([FromBody]ResetPasswordModel model)
         {
@@ -28,6 +30,7 @@ namespace NetCore.Api.Controllers
             return Ok();
         }
 
+        [AuthorizeAdmin]
         [HttpPost, Route("setPassword")]
         public async Task<IActionResult> SetPassword([FromBody]SetPasswordModel model)
         {
